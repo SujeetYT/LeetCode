@@ -4,27 +4,21 @@ using namespace std;
 class Solution {
 public:
     bool isPalindrome(int x) {
+        if(x < 0) return false;
         int copy = x;
-        int num = 0;
-        int i = 0;
+        long int num = 0;
         while(x != 0){
-            int r = x%10;
-            cout<<num<<" "<<r*pow(10, i)<<endl;
-            num += r*pow(10,i);
-            cout<<num<<endl;
-            i++;
+            num = (num*10) + (x%10);
             x/=10;
         }
-        cout<<num<<" "<<copy<<endl;
-        if(num == copy) return true;
-        return false;
+        return (num == copy);
     }
 };
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int x = 120;
+    int x = 1234567899;
     Solution obj;
     cout<<obj.isPalindrome(x);
     return 0;
