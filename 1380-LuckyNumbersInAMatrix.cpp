@@ -5,19 +5,29 @@ class Solution {
 public:
     vector<int> luckyNumbers (vector<vector<int>>& matrix) {
         // int minE = INT_MAX;
-        vector<int>ans, finalAns;
-        for(int i = 0; i < matrix.size(); i++){
-            for(int j = 0; j < matrix[i].size(); j++){
-                ans.push_back(*min_element(matrix[i].begin(), matrix[i].end()));
+        int m = matrix.size();
+        int n = matrix[0].size();
+        vector<int>ans;
+        for(int i = 0; i < m; i++){
+            int maxCol = INT_MIN, minRow = INT_MAX, idx = -1;
+            for(int j = 0; j < n; j++){
+                if(matrix[i][j] < minRow){
+                    minRow = matrix[i][j];
+                    idx = j;
+                }
+            }
+
+            maxCol = minRow;
+            ans.push_back(maxCol);
+
+            for(int k = 0; k < m; k++){
+                if(matrix[k][idx] > maxCol){
+                    ans.pop_back();
+                    break;
+                }
             }
         }
-        sort(ans.begin(), ans.end());
-        // cout<<ans[ans.size()-1]<<endl;
-        // for(auto a: ans){
-        //     cout<<a<<" ";
-        // }
-        finalAns.push_back(ans[ans.size()-1]);
-        return finalAns;
+        return ans;
     }
 };
 
