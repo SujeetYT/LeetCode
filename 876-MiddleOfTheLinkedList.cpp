@@ -29,7 +29,6 @@ public:
             mid++;
             temp = temp->next;
         }
-
         return temp;
     }
 };
