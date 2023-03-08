@@ -2,30 +2,32 @@
 #define ll long long
 using namespace std;
 
-// Using Kadane's Algo
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
-        int n = nums.size();
-        int maxSum = INT_MIN;
-        int curSum = 0;
-        for(int i = 0; i < n; i++){
-            curSum += nums[i];
-            if(maxSum < curSum){
-                maxSum = curSum;
+    int findKthPositive(vector<int>& arr, int k) {
+        int num = 1, i = 0;
+        vector<int>missing;
+        while(i < arr.size()){
+            if(num == arr[i]){
+                i++;
+                // continue;
+            }else{
+                missing.push_back(num);
             }
-            if(curSum < 0){
-                curSum = 0;
-            }
+            num++;
         }
-        return maxSum;
+
+        // for(auto a : missing) cout<<a<<" ";
+        // cout<<"\n"<<missing[k-1]<<endl;
+        return missing[k-1];
     }
 };
 
 void solve(){
-    vector<int> nums = {-2,1,-3,4,-1,2,1,-5,4};
-    Solution obj;
-    cout<<obj.maxSubArray(nums);
+    vector<int>arr = {2,3,4,7,11};
+    int k = 5;
+    Solution sol;
+    cout<<sol.findKthPositive(arr, k);
 }
 
 int main(){
