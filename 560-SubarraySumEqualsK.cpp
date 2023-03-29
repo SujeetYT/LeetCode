@@ -2,30 +2,30 @@
 #define ll long long
 using namespace std;
 
-// Using Kadane's Algo
 class Solution {
 public:
-    int maxSubArray(vector<int>& nums) {
-        int n = nums.size();
-        int maxSum = INT_MIN;
-        int curSum = 0;
-        for(int i = 0; i < n; i++){
-            curSum += nums[i];
-            
-            maxSum = max(maxSum, curSum);
-            
-            if(curSum < 0){
-                curSum = 0;
+    int subarraySum(vector<int>& nums, int k) {
+        int count = 0, sum = 0;
+
+        unordered_map<int, int>mp;
+        mp[0]++;
+        for(auto a : nums){
+            sum += a;
+            if(mp.find(sum-k) != mp.end()){
+                count += mp[sum-k];
             }
+
+            mp[sum]++;
         }
-        return maxSum;
+        return count;
     }
 };
 
 void solve(){
-    vector<int> nums = {-2,1,-3,4,-1,2,1,-5,4};
     Solution obj;
-    cout<<obj.maxSubArray(nums);
+    int k = 3;
+    vector<int>nums = {1,2,3};
+    cout<<obj.subarraySum(nums, k);
 }
 
 int main(){
